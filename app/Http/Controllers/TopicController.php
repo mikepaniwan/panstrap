@@ -1,7 +1,13 @@
 <?php namespace App\Http\Controllers;
 
 use Request;
+
 use App\Http\Controllers\Controller;
+
+use App\Category as Category;
+use App\Tag as Tag;
+use App\Topic as Topic;
+use App\TopicTag as TopicTag;
 
 class TopicController extends Controller {
 
@@ -22,7 +28,8 @@ class TopicController extends Controller {
 	 */
 	public function create()
 	{
-		return view('topic.create', ['pay' => '1']);
+		$categories = Category::all();
+		return view('topic.create', ['categories' => $categories]);
 	}
 
 	/**
