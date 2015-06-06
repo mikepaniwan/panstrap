@@ -35,7 +35,15 @@ class MemberController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$data = Request::all();
+		if($data['name'] == '') return redirect(route('member.edit'))->with('message', 'Invalid Username');
+		
+		$member = member::find($data['old_id']);
+		$member->name = $data['name'];
+		$member->img = $data['img'];
+		$member->save();
+		
+		return redirect(route('member.index'))->with('message', 'Edit Member ID : '.$member->id);
 	}
 
 	/**
