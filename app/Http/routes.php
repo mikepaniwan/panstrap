@@ -25,6 +25,7 @@ Route::resource('topic', 'TopicController');
 
 Route::resource('member', 'MemberController');
 Route::resource('category', 'CategoryController');
+Route::resource('tag', 'TagController');
 
 Route::resource('trend','TrendController');
 
