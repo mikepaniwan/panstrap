@@ -1,3 +1,4 @@
+<table border='1'>
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -11,7 +12,9 @@
 			<tr>
 				<td>{{ $mem->id }}</td>
 				<td>{{ $mem->name }}</td>
+				<td>{{ $mem->rank }}</td>
 				<td>
+					<a href="{{ route('member.edit', ['id' => $mem->id]) }}">Edit</a>
 					<a href="#">Delete</a>
 				</td>
 			</tr>
