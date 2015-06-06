@@ -13,4 +13,12 @@ class HomeController extends Controller {
 		return view('home')->with('trends',$trends)->with('categories',$categories);
 	}
 
+	public function redirectIndex() {
+		return redirect(route('home.index'));
+	}
+
+	public function getCategory() {
+		return view('category');
+	}
+
 }
