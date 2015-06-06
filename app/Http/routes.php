@@ -19,6 +19,8 @@ Route::resource('member', 'MemberController');
 
 Route::resource('trend','TrendController');
 
+Route::controller('/test','TestController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
