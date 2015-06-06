@@ -7,6 +7,6 @@ class Category extends Model {
 	protected $table = 'categories';
 
 	public function getTags() {
-		return $this->hasMany('App/Category');
+		return $this->hasMany('App\Tag');
 	}
 }

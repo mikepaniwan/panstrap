@@ -6,9 +6,9 @@ class TestController extends Controller {
 
 	public function __construct()
 	{
-		$this->middleware('guest');
+		$this->middleware('admin');
 	}
-	
+
 	public function getUser() {
 		return User::all();
 	}

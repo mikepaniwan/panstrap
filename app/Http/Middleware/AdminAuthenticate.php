@@ -4,7 +4,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
 
-class RedirectIfAuthenticated {
+class AdminAuthenticate {
 
 	/**
 	 * The Guard implementation.
@@ -37,7 +37,8 @@ class RedirectIfAuthenticated {
 		{
 			if($this->auth->type == 'user')
 				return new RedirectResponse(url('/home'));
-		}
+		}else
+			return new RedirectResponse(url('/auth/login'));
 
 		return $next($request);
 	}
