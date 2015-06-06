@@ -14,7 +14,7 @@ class AddTestToTopicTrend extends Migration {
 	 */
 	public function up()
 	{
-		$trends = [1,2];
+		$trends = [1];
 
 		foreach ($trends as $trend) {
 			$new_trend = new Trend;
