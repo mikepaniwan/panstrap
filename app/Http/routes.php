@@ -20,6 +20,7 @@ Route::get('/home','HomeController@redirectIndex');
 Route::get('/category/{id}','HomeController@getCategory');
 
 Route::resource('member', 'MemberController');
+Route::resource('category', 'CategoryController');
 
 Route::resource('trend','TrendController');
 
