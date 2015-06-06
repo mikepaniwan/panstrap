@@ -1,11 +1,10 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use Request;
 use App\Http\Controllers\Controller;
 
 use App\Topic;
-
-use Illuminate\Http\Request;
+use App\Trend as trend; 
 
 class TrendController extends Controller {
 
@@ -28,7 +27,10 @@ class TrendController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$trend = new trend;
+		$trend->topic_id = Request::input('id');
+		$trend->save();
+		return redirect()->back();
 	}
 
 	/**
@@ -60,7 +62,6 @@ class TrendController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
 	}
 
 	/**
@@ -83,6 +84,9 @@ class TrendController extends Controller {
 	public function destroy($id)
 	{
 		//
+		$trend = trend::where('topic_id',"=", $id);
+		$trend->delete();
+		return redirect()->back()->with('message', 'Delete inventory id:'.$id);
 	}
 
 }

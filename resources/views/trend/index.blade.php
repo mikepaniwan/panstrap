@@ -1,4 +1,7 @@
-<table border="1" width= "100%">
+@extends( '../admin/template')
+
+@section('admin-content')
+<table class='table'>
 	<thead>
 		<tr>
 			<td>ID</td>
@@ -14,13 +17,12 @@
 			<td> {{$topic->subject}}</td>
 			<td> {{$topic->getUser->name}}</td>
 			<td>
-				@if(empty($topic->getTrend))
+				@if($topic->getTrend == "")
 						<a href="{{ route('trend.create',['id' => $topic->id]) }}">Add</a>
-				
 				@else
 					
 					<form action="{{ route('trend.destroy',['id' => $topic->id])}}" method="post">
-						<input type="hidden" name="_method" value="remove">
+						<input type="hidden" name="_method" value="DELETE">
 						<input type="hidden" name="_token" value = "{{ csrf_token()}}" >
 						<input type="submit" onclick="return confirm ('Lets go??');" value="remove">
 					</form>
@@ -30,3 +32,4 @@
 		@endforeach
 	</tbody>
 </table>
+@endsection
