@@ -35,8 +35,9 @@ class AdminAuthenticate {
 	{
 		if ($this->auth->check())
 		{
-			if($this->auth->type == 'user')
+			if($this->auth->user()->rank == 'user')
 				return new RedirectResponse(url('/home'));
+
 		}else
 			return new RedirectResponse(url('/auth/login'));
 
