@@ -1,37 +1,45 @@
 <?php namespace App\Http\Controllers;
 
+use App\Trend as Trend;
+use App\Category as Category;
 
 class HomeController extends Controller {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders your application's "dashboard" for users that
-	| are authenticated. Of course, you are free to change or remove the
-	| controller as you wish. It is just here to get your app started!
-	|
-	*/
-
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		$this->middleware('auth');
-	}
-
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
-		return view('home');
+		$trends = Trend::all();
+		$categories = Category::all();
+
+		return view('home')->with('trends',$trends)->with('categories',$categories);
+	}
+
+	public function redirectIndex() {
+		return redirect(route('home.index'));
+	}
+
+	public function getCategory($id) {
+		$category = Category::find($id);
+		$topics = [];
+
+
+		foreach($category->getTags as $tag) {
+			if(count($tag->getTopics) > 0) {
+				foreach($tag->getTopics as $topic) {
+					$new_topic = [];
+					$new_topic['topic'] = $topic->getTopic;
+					$new_topic['tag'] = [];
+					foreach ($topic->getTopic->getTopicTags as $tag) {
+						array_push($new_topic['tag'],$tag->getTag->name);
+					}
+					array_push($topics, $new_topic);
+				}
+			}
+		}
+
+		//return $topics[0];
+
+
+		return view('category')->with('category',$category)->with('topics',$topics);
 	}
 
 }

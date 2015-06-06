@@ -3,10 +3,10 @@
 use Request;
 use App\Http\Controllers\Controller;
 
-use App\User as user;
-use Auth;
+use App\Topic;
+use App\Trend as trend; 
 
-class MemberController extends Controller {
+class TrendController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,8 +15,9 @@ class MemberController extends Controller {
 	 */
 	public function index()
 	{
-		$user = user::all();
-		return view('member.index')->with('user', $user);
+		//
+		$topic = Topic::all();
+		return view('trend.index')->with('topic',$topic);
 	}
 
 	/**
@@ -26,7 +27,10 @@ class MemberController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$trend = new trend;
+		$trend->topic_id = Request::input('id');
+		$trend->save();
+		return redirect()->back();
 	}
 
 	/**
@@ -36,15 +40,7 @@ class MemberController extends Controller {
 	 */
 	public function store()
 	{
-		$data = Request::all();
-		if($data['name'] == '') return redirect(route('member.edit'))->with('message', 'Invalid Username');
-		
-		$user = user::find($data['old_id']);
-		$user->name = $data['name'];
-		$user->img = $data['img'];
-		$user->save();
-		
-		return redirect(route('member.index'))->with('message', 'Edit User ID : '.$user->id);
+		//
 	}
 
 	/**
@@ -66,8 +62,6 @@ class MemberController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$user = user::find($id);
-		return view('member.edit')->with('user', $user);
 	}
 
 	/**
@@ -89,9 +83,10 @@ class MemberController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$user = user::find($id);
-		$user->delete();
-		return redirect()->back()->with('message', 'Delete User id : '.$id);
+		//
+		$trend = trend::where('topic_id',"=", $id);
+		$trend->delete();
+		return redirect()->back()->with('message', 'Delete inventory id:'.$id);
 	}
 
 }

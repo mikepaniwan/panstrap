@@ -3,10 +3,9 @@
 use Request;
 use App\Http\Controllers\Controller;
 
-use App\User as user;
-use Auth;
+use App\Category as category;
 
-class MemberController extends Controller {
+class CategoryController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,8 +14,8 @@ class MemberController extends Controller {
 	 */
 	public function index()
 	{
-		$user = user::all();
-		return view('member.index')->with('user', $user);
+		$category = category::all();
+		return view('category.index')->with('category', $category);
 	}
 
 	/**
@@ -26,7 +25,7 @@ class MemberController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('category.edit');
 	}
 
 	/**
@@ -37,14 +36,22 @@ class MemberController extends Controller {
 	public function store()
 	{
 		$data = Request::all();
-		if($data['name'] == '') return redirect(route('member.edit'))->with('message', 'Invalid Username');
+		if($data['name'] == '') return redirect(route('category.edit'))->with('message', 'Invalid Name');
 		
-		$user = user::find($data['old_id']);
-		$user->name = $data['name'];
-		$user->img = $data['img'];
-		$user->save();
+		if($data['old_id'] != '')
+		{
+			$category = category::find($data['old_id']);
+			$message = 'Edit User ID : '.$category->id;
+		}
+		else
+		{
+			$category = new category;
+			$message = 'Create New Category';
+		}
+		$category->name = $data['name'];
+		$category->save();
 		
-		return redirect(route('member.index'))->with('message', 'Edit User ID : '.$user->id);
+		return redirect(route('category.index'))->with('message', $message);
 	}
 
 	/**
@@ -66,8 +73,8 @@ class MemberController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$user = user::find($id);
-		return view('member.edit')->with('user', $user);
+		$category = category::find($id);
+		return view('category.edit')->with('category', $category);
 	}
 
 	/**
@@ -89,9 +96,7 @@ class MemberController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$user = user::find($id);
-		$user->delete();
-		return redirect()->back()->with('message', 'Delete User id : '.$id);
+		//
 	}
 
 }

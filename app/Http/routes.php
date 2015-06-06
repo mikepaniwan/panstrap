@@ -11,13 +11,22 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
+Route::get('/', [
+	'as' => 'home.index',
+	'uses' => 'HomeController@index'
+]);
+Route::get('/home','HomeController@redirectIndex');
+Route::get('/category/{id}',[
+	'as' => 'home.category',
+	'uses' => 'HomeController@getCategory'
+]);
 
 Route::resource('topic', 'TopicController');
 
 Route::resource('member', 'MemberController');
+Route::resource('category', 'CategoryController');
+
+Route::resource('trend','TrendController');
 
 Route::controller('/test','TestController');
 

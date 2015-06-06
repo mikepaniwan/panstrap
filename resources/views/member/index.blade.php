@@ -1,7 +1,10 @@
+@extends('../admin/template')
+
+@section('admin-content')
 @if(session()->has('message') != '')
 	<h3>Message : {{ session('message') }}</h3>
 @endif
-<table border='1'>
+<table class='table'>
 	<thead>
 		<tr>
 			<th>ID</th>
@@ -11,16 +14,21 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($member as $mem)
+		@foreach($user as $user)
 			<tr>
-				<td>{{ $mem->id }}</td>
-				<td>{{ $mem->name }}</td>
-				<td>{{ $mem->img }}</td>
+				<td>{{ $user->id }}</td>
+				<td>{{ $user->name }}</td>
+				<td>{{ $user->img }}</td>
 				<td>
-					<a href="{{ route('member.edit', ['id' => $mem->id]) }}">Edit</a>
-					<a href="#">Delete</a>
+					<form action="{{ route('member.destroy', ['id' => $user->id]) }}" method='post'>
+						<a href="{{ route('member.edit', ['id' => $user->id]) }}" class='btn btn-success'>Edit</a>
+						<input type='hidden' name='_method' value='DELETE'>
+						<input type='hidden' name='_token' value='{{ csrf_token() }}'>
+						<input type='submit' class='btn btn-danger' onclick="return confirm('Are you ready ?');" value='Delete'>
+					</form>
 				</td>
 			</tr>
 		@endforeach
 	</tbody>
 </table>
+@endsection
