@@ -8,7 +8,7 @@ class Trend extends Model {
 	protected $table = 'trends';
 
 	public function getTopic() {
-		return $this->belongsTo('App\Topic');
+		return $this->belongsTo('App\Topic','topic_id');
 	}
 
 }
