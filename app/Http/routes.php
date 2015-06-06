@@ -17,7 +17,13 @@ Route::get('home', 'HomeController@index');
 
 Route::resource('topic', 'TopicController');
 
+Route::resource('member', 'MemberController');
+
+Route::controller('/test','TestController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+
