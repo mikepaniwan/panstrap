@@ -3,7 +3,8 @@
 use Request;
 use App\Http\Controllers\Controller;
 
-use App\User as member;
+use App\User as user;
+use Auth;
 
 class MemberController extends Controller {
 
@@ -14,8 +15,8 @@ class MemberController extends Controller {
 	 */
 	public function index()
 	{
-		$member = member::all();
-		return view('member.index')->with('member', $member);
+		$user = user::all();
+		return view('member.index')->with('user', $user);
 	}
 
 	/**
@@ -38,12 +39,12 @@ class MemberController extends Controller {
 		$data = Request::all();
 		if($data['name'] == '') return redirect(route('member.edit'))->with('message', 'Invalid Username');
 		
-		$member = member::find($data['old_id']);
-		$member->name = $data['name'];
-		$member->img = $data['img'];
-		$member->save();
+		$user = user::find($data['old_id']);
+		$user->name = $data['name'];
+		$user->img = $data['img'];
+		$user->save();
 		
-		return redirect(route('member.index'))->with('message', 'Edit Member ID : '.$member->id);
+		return redirect(route('member.index'))->with('message', 'Edit User ID : '.$user->id);
 	}
 
 	/**
@@ -65,8 +66,8 @@ class MemberController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$member = member::find($id);
-		return view('member.edit')->with('member', $member);
+		$user = user::find($id);
+		return view('member.edit')->with('user', $user);
 	}
 
 	/**
@@ -88,7 +89,9 @@ class MemberController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$user = user::find($id);
+		$user->delete();
+		return redirect()->back()->with('message', 'Delete User id : '.$id);
 	}
 
 }

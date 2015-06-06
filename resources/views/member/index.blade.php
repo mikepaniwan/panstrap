@@ -11,14 +11,18 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($member as $mem)
+		@foreach($user as $user)
 			<tr>
-				<td>{{ $mem->id }}</td>
-				<td>{{ $mem->name }}</td>
-				<td>{{ $mem->img }}</td>
+				<td>{{ $user->id }}</td>
+				<td>{{ $user->name }}</td>
+				<td>{{ $user->img }}</td>
 				<td>
-					<a href="{{ route('member.edit', ['id' => $mem->id]) }}">Edit</a>
-					<a href="#">Delete</a>
+					<form action="{{ route('member.destroy', ['id' => $user->id]) }}" method='post'>
+						<a href="{{ route('member.edit', ['id' => $user->id]) }}">Edit</a>
+						<input type='hidden' name='_method' value='DELETE'>
+						<input type='hidden' name='_token' value='{{ csrf_token() }}'>
+						<input type='submit' onclick="return confirm('Are you ready ?');" value='Delete'>
+					</form>
 				</td>
 			</tr>
 		@endforeach
