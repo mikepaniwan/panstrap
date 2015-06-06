@@ -14,7 +14,7 @@ class AddTestToCategory extends Migration {
 	 */
 	public function up()
 	{
-		$categories = ['ก้นครัว','กรีนโซน','กล้อง','การ์ตูน','จุตจักร','มาบุญครอง','วัยรุ่น','หว้ากอ'];
+		$categories = ['ก้นครัว','สัตว์','กล้อง','การ์ตูน','เทคโนโลยี','วัยรุ่น','วิทยาศาสตร์'];
 
 		foreach($categories as $cat) {
 			$new_category = new Category;

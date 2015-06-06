@@ -16,7 +16,8 @@ class AddTestToUser extends Migration {
 	{
 		$users = [
 			['name' => 'admin', 'rank' => 'admin', 'email' => 'admin@test.com' ,'password' => bcrypt('123456')],
-			['name' => 'mike', 'rank' => 'user', 'email' => 'mike@test.com', 'password' => bcrypt('123456')]
+			['name' => 'mike', 'rank' => 'user', 'email' => 'mike@test.com', 'password' => bcrypt('123456')],
+			['name' => 'earth', 'rank' => 'user', 'email' => 'earth@test.com', 'password' => bcrypt('123456')]
 		];
 
 		foreach ($users as $user) {
