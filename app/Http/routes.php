@@ -17,6 +17,8 @@ Route::get('home', 'HomeController@index');
 
 Route::resource('member', 'MemberController');
 
+Route::resource('trend','TrendController');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
