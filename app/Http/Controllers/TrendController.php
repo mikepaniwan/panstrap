@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Topic;
+
 use Illuminate\Http\Request;
 
 class TrendController extends Controller {
@@ -15,6 +17,8 @@ class TrendController extends Controller {
 	public function index()
 	{
 		//
+		$topic = Topic::all();
+		return view('trend.index')->with('topic',$topic);
 	}
 
 	/**
