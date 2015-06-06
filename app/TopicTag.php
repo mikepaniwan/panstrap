@@ -7,4 +7,12 @@ class TopicTag extends Model {
 	//
 	protected $table = 'topic_tags';
 
+	public function getTopic() {
+		return $this->belongsTo('App\Topic');
+	}
+
+	public function getTag() {
+		return $this->belongsTo('App\Tag');
+	}
+
 }
