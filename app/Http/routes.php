@@ -15,9 +15,11 @@ Route::get('/', [
 	'as' => 'home.index',
 	'uses' => 'HomeController@index'
 ]);
-
 Route::get('/home','HomeController@redirectIndex');
-Route::get('/category/{id}','HomeController@getCategory');
+Route::get('/category/{id}',[
+	'as' => 'home.category',
+	'uses' => 'HomeController@getCategory'
+]);
 
 Route::resource('member', 'MemberController');
 Route::resource('category', 'CategoryController');
