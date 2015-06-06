@@ -39,7 +39,20 @@ class TopicController extends Controller {
 	 */
 	public function store()
 	{
-		return Request::all();
+		$inputs = Request::all();
+		$topic = new Topic;
+		$topic->user_id = 2;
+		$topic->subject = $inputs['subject'];
+		$topic->description = $inputs['description'];
+		$topic->save();
+		foreach ($inputs['tags'] as $tagId) {
+			$topicTag = new TopicTag;
+			$topicTag->topic_id = $topic->id;
+			$topicTag->tag_id = $tagId;
+			$topicTag->save();
+		}
+
+		return 'Completed!';
 	}
 
 	/**
@@ -50,7 +63,16 @@ class TopicController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$message = '';
+		$topics = Topic::all();
+		foreach ($topics as $topic) {
+			$message .= $topic->subject . ':' . $topic->description . ':';
+			foreach ($topic->getTopicTags as $topicTag) {
+				$message .= $topicTag->getTag->name . ',';
+			}
+			$message .= '<br>';
+		}
+		return $message;
 	}
 
 	/**

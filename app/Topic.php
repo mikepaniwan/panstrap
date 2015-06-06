@@ -19,4 +19,8 @@ class Topic extends Model {
 		return $this->hasMany('App\TopicTag');
 	}
 
+	public function getTrend() {
+		return $this->hasOne('App\Trend');
+	}
+
 }

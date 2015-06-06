@@ -12,7 +12,7 @@ class TopicTag extends Model {
 	}
 
 	public function getTag() {
-		return $this->belongsTo('App\Tag');
+		return $this->belongsTo('App\Tag','tag_id');
 	}
 
 }
